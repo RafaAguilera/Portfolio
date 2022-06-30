@@ -4,12 +4,18 @@ var app = express();
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({extended: true})); 
+app.use(express.static('public'));
+app.use(express.static('views'));
 
 app.get("/", (req,res) => {
+    res.render("index");
+});
+
+app.get("/contact", (req,res) => {
     res.render("contact");
 });
 
-app.post('/', async (req, res) => {
+app.post('/thanks', async (req, res) => {
 
     const {firstName, lastName, email} = req.body;
 
@@ -51,7 +57,7 @@ await googleSheets.spreadsheets.values.append({
 
 });
 
-res.send(`Thank you ${firstName} ${lastName} ${email}`)
+res.render("thanks", {firstName: firstName, lastName: lastName});
 });
 
 app.listen(8080, () => {
