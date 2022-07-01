@@ -60,5 +60,4 @@ await googleSheets.spreadsheets.values.append({
 res.render("thanks", {firstName: firstName, lastName: lastName});
 });
 
-app.listen(8080, () => {
-    console.log('listening on http://localhost:8080')});
+module.exports = app;
